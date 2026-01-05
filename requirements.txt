@@ -1,0 +1,4 @@
+spacy>=3.6
+transformers>=4.35
+torch>=2.0
+pandas>=2.0
