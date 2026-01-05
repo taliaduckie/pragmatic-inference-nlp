@@ -1,0 +1,44 @@
+"""
+analyze.py
+Unified CLI for pragmatic inference analysis.
+
+Usage:
+    python analyze.py --text "She managed to finish the paper."
+"""
+
+import argparse
+import spacy
+from scalar import detect_scalar_implicatures
+from presupposition import detect_presuppositions
+
+nlp = spacy.load("en_core_web_sm")
+
+
+def analyze(text: str):
+    doc = nlp(text)
+    tokens = [tok.text for tok in doc]
+
+    print(f"\nInput: {text!r}\n")
+
+    scalars = detect_scalar_implicatures(tokens)
+    if scalars:
+        print("Scalar implicatures:")
+        for s in scalars:
+            print(f"  · '{s['term']}' [{s['scale_type']}] → implicates {s['implicature']}")
+    else:
+        print("Scalar implicatures: none detected")
+
+    presups = detect_presuppositions(tokens)
+    if presups:
+        print("\nPresupposition triggers:")
+        for p in presups:
+            print(f"  · '{p['trigger']}' ({p['type']}) → presupposes {p['presupposition']}")
+    else:
+        print("\nPresupposition triggers: none detected")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--text", required=True)
+    args = parser.parse_args()
+    analyze(args.text)
