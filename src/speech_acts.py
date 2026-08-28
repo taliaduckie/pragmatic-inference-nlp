@@ -47,7 +47,7 @@ def detect_indirect_speech_acts(tokens: list[str]) -> list[dict]:
             if tuple(tokens_lower[i:i + n]) == pattern and not any(j in consumed for j in span):
                 consumed.update(span)
                 matches.append((i, {
-                    "pattern": " ".join(tokens[i:i + n]),
+                    "pattern": " ".join(tokens[i:i + n]).replace(" n't", "n't"),
                     "literal_force": literal,
                     "indirect_force": indirect,
                 }))
