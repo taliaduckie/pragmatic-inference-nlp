@@ -26,13 +26,15 @@ def detect_scalar_implicatures(tokens: list[str]) -> list[dict]:
     tokens_lower = [t.lower() for t in tokens]
 
     for scale_type, scale in scales.items():
-        for i, term in enumerate(scale[:-1]):  # skip strongest
+        # Scales are ordered strongest-first; the strongest term (index 0)
+        # has no stronger alternative and licenses no implicature.
+        for i, term in enumerate(scale[1:], start=1):
             if term in tokens_lower:
                 stronger = scale[:i]
                 results.append({
                     "term": term,
                     "scale_type": scale_type,
                     "stronger_terms": stronger,
-                    "implicature": f"Not {stronger[0]!r}" if stronger else None,
+                    "implicature": f"Not {stronger[0]!r}",
                 })
     return results
