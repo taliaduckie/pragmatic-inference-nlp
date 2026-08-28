@@ -10,6 +10,7 @@ import argparse
 import spacy
 from scalar import detect_scalar_implicatures
 from presupposition import detect_presuppositions
+from speech_acts import detect_indirect_speech_acts
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -35,6 +36,15 @@ def analyze(text: str):
             print(f"  · '{p['trigger']}' ({p['type']}) → presupposes {p['presupposition']}")
     else:
         print("\nPresupposition triggers: none detected")
+
+    speech_acts = detect_indirect_speech_acts(tokens)
+    if speech_acts:
+        print("\nIndirect speech acts:")
+        for a in speech_acts:
+            print(f"  · '{a['pattern']}' — literally {a['literal_force']}, "
+                  f"conventionally a {a['indirect_force']}")
+    else:
+        print("\nIndirect speech acts: none detected")
 
 
 if __name__ == "__main__":
