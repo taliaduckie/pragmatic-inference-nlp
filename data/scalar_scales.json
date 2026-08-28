@@ -1,7 +1,6 @@
 {
-  "quantifier": ["all", "most", "many", "some", "few"],
+  "quantifier": ["all", "most", "many", "some"],
   "epistemic": ["certain", "probable", "possible"],
-  "frequency": ["always", "often", "sometimes", "rarely", "never"],
-  "completion": ["finish", "start"],
-  "numeral": ["two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
+  "frequency": ["always", "often", "sometimes"],
+  "completion": ["finish", "start"]
 }
