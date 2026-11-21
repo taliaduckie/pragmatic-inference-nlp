@@ -16,15 +16,18 @@ Designed as a research-grade annotation aid, not a black-box classifier.
 ```bash
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
-python src/analyze.py --text "She managed to finish the paper."
+python src/analyze.py --text "Some students will retry."
 ```
 
 ## Example output
 ```
-Input: "She managed to finish the paper."
-Presupposition trigger: 'managed' (factive implicative — implies prior difficulty)
-Scalar implicature: none detected
-Indirect speech act: none detected
+Input: "Some students will retry."
+Scalar implicatures:
+  · 'some' [quantifier] → implicates Not 'all'
+
+Presupposition triggers:
+  · 'retry' (iterative) → presupposes event occurred before
+Indirect speech acts: none detected
 ```
 
 ## Project Structure
@@ -38,5 +41,14 @@ pragmatic-inference-nlp/
 ├── data/
 │   └── scalar_scales.json
 └── tests/
-    └── test_scalar.py
+    ├── test_scalar.py
+    ├── test_speech_acts.py
+    └── test_presupposition.py
 ```
+
+## Testing
+
+This is a rule-based prototype. Record the spaCy version and
+`en_core_web_sm` model version alongside any reported output (both are shown
+by `python -m spacy info`). The offline rule tests do not require a spaCy model:
+`python -m pip install -r requirements-dev.txt && python -m pytest -q`.
