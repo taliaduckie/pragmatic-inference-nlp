@@ -1,16 +1,20 @@
 # Pragmatic Inference NLP Tool
 
-A Python toolkit for detecting and classifying pragmatic inference phenomena
-in natural language: scalar implicature, indirect speech acts, and
-presupposition triggers.
+A small, rule-based Python prototype for exploring pragmatic inference. It
+flags candidate readings from token patterns rather than deciding what a speaker
+meant in context.
 
-Grounded in Gricean maxims and neo-Gricean theory (Horn, Levinson).
-Designed as a research-grade annotation aid, not a black-box classifier.
+- **Scalar terms**: look up alternatives on a fixed scale. For example,
+  `some` can suggest `not all`, but that inference can be canceled.
+- **Indirect requests and suggestions**: match conventional forms such as
+  `could you` and `why don't you`. The same words can also occur in a literal
+  question.
+- **Presupposition triggers**: flag lexical patterns such as `retry` and simple
+  definite descriptions. A flag is a prompt to inspect the sentence, not a
+  judgment that the presupposition holds.
 
-## What it detects
-- **Scalar implicature** — "some" → not all, "possible" → not certain
-- **Indirect speech acts** — "Can you pass the salt?" as a request, not a question
-- **Presupposition triggers** — factive verbs, definite descriptions, iteratives
+The rules take a single utterance, without its preceding discourse. Use the
+output as a starting point for hand annotation, not as validated labels.
 
 ## Setup
 ```bash
@@ -48,7 +52,7 @@ pragmatic-inference-nlp/
 
 ## Testing
 
-This is a rule-based prototype. Record the spaCy version and
+Record the spaCy version and
 `en_core_web_sm` model version alongside any reported output (both are shown
 by `python -m spacy info`). The offline rule tests do not require a spaCy model:
 `python -m pip install -r requirements-dev.txt && python -m pytest -q`.
