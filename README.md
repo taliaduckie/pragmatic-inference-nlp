@@ -1,7 +1,7 @@
 # Pragmatic Inference NLP Tool
 
-A small, rule-based Python prototype for exploring pragmatic inference. It
-flags candidate readings from token patterns rather than deciding what a speaker
+A smol rule-based Python prototype for exploring pragmatic inference which is supposed to
+flag candidate readings from token patterns rather than deciding what a speaker
 meant in context.
 
 - **Scalar terms**: look up alternatives on a fixed scale. For example,
